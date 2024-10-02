@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <!-- Add a card container for the form with a gradient background -->
+        <div class="card shadow-lg border-0">
+            <div class="card-header text-center bg-gradient-primary text-white py-4" style="background: linear-gradient(45deg, #6a11cb, #2575fc);">
+                <h2 class="my-2 fw-bold">Add New Employee</h2>
+            </div>
+            <div class="card-body p-5">
+                <!-- Form with a shadow effect and margin spacing -->
+                <form method="POST" novalidate>
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger mt-3">
+                            {{ form.non_field_errors }}
+                        </div>
+                    {% endif %}
+                    
+                    <!-- Stylish submit button -->
+                    <button type="submit" class="btn btn-primary w-100 btn-lg mt-4 py-2" style="background: linear-gradient(45deg, #43cea2, #185a9d); border: none;">
+                        <i class="bi bi-person-plus-fill me-2"></i> Add Employee
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Adding some top and bottom space for better visual effect -->
+<div class="row mt-5 mb-3"></div>
+{% endblock %}

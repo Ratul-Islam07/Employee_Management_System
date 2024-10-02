@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <!-- Heading Section -->
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1 class="my-3 display-4 fw-bold text-uppercase text-dark">Employee Profiles</h1>
+            <p class="fw-bold text-muted">Meet Our Talented Team Members</p>
+        </div>
+    </div>
+
+    <!-- Employee Cards -->
+    <div class="row">
+        {% for employee in employees %}
+        <div class="col-sm-12 col-md-6 col-lg-4 d-flex align-items-stretch">
+            <div class="card mb-4 shadow-lg border-0 w-100 rounded-lg bg-dark text-light">
+                <!-- Card Body -->
+                <div class="card-body d-flex flex-column">
+                    <!-- Employee Name and Designation -->
+                    <div class="mb-3">
+                        <h5 class="card-title fw-bold text-light">{{ employee.name }}</h5>
+                        <p class="card-subtitle mb-2">{{ employee.designation }}</p>
+                        <p class="card-text">{{ employee.short_description }}</p>
+                    </div>
+                    <!-- Buttons -->
+                    <div class="mt-auto">
+                        <a href="{% url 'profile_page' employee.pk %}" class="btn btn-outline-light w-100 mb-2">
+                            <i class="bi bi-person-fill me-2"></i> View Profile
+                        </a>
+                        {% comment %}
+                        <a href="{% url 'update_employee' employee.pk %}" class="btn btn-info w-100 mb-2">Update</a>
+                        <a href="{% url 'delete_employee' employee.pk %}" class="btn btn-danger w-100">Delete</a>
+                        {% endcomment %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <p class="text-center text-light">No employees found.</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% comment %} <!-- Spacer for clean bottom -->
+    <div class="row my-5"></div> {% endcomment %}
+
+     <!-- Footer Section -->
+     <div class="row">
+        <div class="col-12 text-center">
+            <footer class="text-muted">
+                <p class="py-4"><i>We appreciate your interest in our amazing team.</i></p>
+            </footer>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg my-5">
+                <div class="card-header bg-primary text-white text-center">
+                    <h2 class="my-2">{{ employee.name }}'s Profile</h2>
+                </div>
+                <div class="card-body bg-light">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between">
+                            <strong>Name:</strong>
+                            <span>{{ employee.name }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <strong>Address:</strong>
+                            <span>{{ employee.address }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <strong>Phone Number:</strong>
+                            <span>{{ employee.phone_number }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <strong>Salary:</strong>
+                            <span>${{ employee.salary }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <strong>Designation:</strong>
+                            <span>{{ employee.designation }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <strong>Short Description:</strong>
+                            <span>{{ employee.short_description }}</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-footer text-center">
+                    <a href="{% url 'update_employee' employee.pk %}" class="btn btn-warning mx-2">Update</a>
+                    <a href="{% url 'delete_employee' employee.pk %}" class="btn btn-danger mx-2">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

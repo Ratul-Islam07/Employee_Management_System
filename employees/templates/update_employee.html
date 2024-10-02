@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-8 col-lg-6">
+        <!-- Card container for the form -->
+        <div class="card shadow-lg border-0">
+            <div class="card-header text-center bg-gradient-primary text-white py-4" style="background: linear-gradient(45deg, #0072ff, #00c6ff);">
+                <h2 class="my-2 fw-bold">Update Employee - {{ employee.name }}</h2>
+            </div>
+            <div class="card-body p-5">
+                <!-- Form with a shadow effect and spacing -->
+                <form method="POST" novalidate>
+                    {% csrf_token %}
+                    {{ form|crispy }}
+
+                    <!-- Display any form errors -->
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger mt-3">
+                            {{ form.non_field_errors }}
+                        </div>
+                    {% endif %}
+                    
+                    <!-- Stylish submit button -->
+                    <button type="submit" class="btn btn-primary w-100 btn-lg mt-4 py-2" style="background: linear-gradient(45deg, #43cea2, #185a9d); border: none;">
+                        <i class="bi bi-pencil-fill me-2"></i> Update Employee
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Adding bottom spacing for better visual effect -->
+<div class="row mt-5 mb-3"></div>
+{% endblock %}

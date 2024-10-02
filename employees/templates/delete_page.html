@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <!-- Heading Section -->
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1 class="my-3 display-4 fw-bold text-uppercase text-dark" style="letter-spacing: 2px;">Employee Profiles</h1>
+        </div>
+    </div>
+
+    <!-- Employee Cards -->
+    <div class="row">
+        {% for employee in employees %}
+        <div class="col-sm-12 col-md-6 col-lg-4 d-flex align-items-stretch mb-4">
+            <div class="card shadow-lg border-0 rounded-lg bg-light text-dark w-100">
+                <!-- Card Body -->
+                <div class="card-body d-flex flex-column p-4">
+                    <!-- Employee Name and Designation -->
+                    <h5 class="card-title text-dark fw-bold">{{ employee.name }}</h5>
+                    <p class="card-subtitle mb-2 text-muted">{{ employee.designation }}</p>
+                    <p class="card-text mb-3">{{ employee.short_description }}</p>
+
+                    <!-- Button with Hover Effect -->
+                    <div class="mt-auto">
+                        <a href="{% url 'delete_employee' employee.pk %}" class="btn btn-danger w-100" 
+                        style="background: linear-gradient(45deg, #d9534f, #c9302c); border: none; font-weight: bold;">
+                            <i class="bi bi-trash-fill me-2"></i> Delete
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <p class="text-center text-muted">No employees found.</p>
+        </div>
+        {% endfor %}
+    </div>
+    <footer class="text-dark py-4 ">
+        <div class="container text-center">
+            <p class="mb-0"><i>We appreciate your interest in our dedicated team. Feel free to connect with us for more insights!</i></p>
+        </div>
+    </footer>
+{% endblock %}
