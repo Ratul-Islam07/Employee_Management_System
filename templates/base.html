@@ -20,6 +20,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'home' %}">Home</a>
                     </li>
+                    {% if request.user.is_staff %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'add_employee' %}">Add Employee</a>
                     </li>
@@ -29,7 +30,13 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'delete_page' %}">Delete Employee</a>
                     </li>
+                    {% endif %}
                 </ul>
+                <!-- Right-aligned user info and logout button -->
+                <div class="d-flex justify-content-end align-items-center ms-auto">
+                    <p class="d-inline mb-2 text-white me-3">Current user: {{ request.user }}</p>
+                    <a href="{% url 'logout' %}" class="btn btn-light d-inline mb-2 ">LogOut</a>
+                </div>
             </div>
         </div>
     </nav>

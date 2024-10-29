@@ -35,10 +35,14 @@
                         </li>
                     </ul>
                 </div>
+                
                 <div class="card-footer text-center">
                     <a href="{% url 'update_employee' employee.pk %}" class="btn btn-warning mx-2">Update</a>
+                    {% if request.user.is_staff %}
                     <a href="{% url 'delete_employee' employee.pk %}" class="btn btn-danger mx-2">Delete</a>
+                    {% endif %}
                 </div>
+                
             </div>
         </div>
     </div>

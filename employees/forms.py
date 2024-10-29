@@ -1,6 +1,9 @@
 from django import forms
 from .models import Employee
 
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
 class EmployeeForm(forms.ModelForm):
     class Meta:
         model = Employee
@@ -20,10 +23,23 @@ class EmployeeForm(forms.ModelForm):
             raise forms.ValidationError('Salary must be a positive value.')
         return salary
 
-
     def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)  # Get the user from the kwargs
         super(EmployeeForm, self).__init__(*args, **kwargs)
-        # If the form is being used to update an existing employee, disable salary and designation fields
+        
+        # If the form is being used to update an existing employee
         if self.instance.pk:
-            self.fields['salary'].disabled = True
-            self.fields['designation'].disabled = True
+            # Allow admin or superuser to update salary and designation
+            if not user or not user.is_superuser:
+                self.fields['salary'].disabled = True
+                self.fields['designation'].disabled = True
+
+# In your view, make sure to pass the request.user to the form
+# Example:
+# form = EmployeeForm(instance=employee_instance, user=request.user)
+
+class CreateUserForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
+
